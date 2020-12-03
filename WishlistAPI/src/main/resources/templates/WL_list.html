@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List of WishLists</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}">
+    <style type="text/css">
+    h1{
+    color: green;
+    }
+    h2{
+    color: green;
+    text-align: center;
+    border: 1px solid black;
+    }
+    table, th, td {
+  	border: 1px solid green;
+  	margin-left:auto;
+  	margin-right:auto;
+  	padding-top: 20px;
+  	padding: 20px;
+  	border-collapse: collapse;
+    }
+    body{
+    background-color:lightgrey;
+    }
+    
+    </style>   
+</head>
+<body> 
+
+<h1>GeekText!</h1>
+
+<button class="btn home">Home</button>
+<button class="btn books">Books</button>
+<button class="btn wish list">WishList</button>  <!-- link wl_list to this button -->  
+<button class="btn shopping cart">Shopping Cart</button>
+<button class="btn login">Login</button>
+
+<input type="text" placeholder="Search..">
+
+<h2>WishLists</h2>
+
+
+<div class="container">
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>WishListIndex</th>
+            <th>WishListName</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="wishlist : ${wishlist}">
+            <td th:text="${wishlist.wishlistindex}"></td>
+            <td th:text="${wishlist.wishlistname}"></td>
+            <td>
+                <a th:href="@{/wishlist/delete/{id}(id=${wishlist.wishlistID})}" class="btn btn-danger btn-sm" role="button">Delete</a> <!-- only deletes wishlist if its empty -->
+                <a th:href="@{/wishlist/edit/{id}(id=${wishlist.wishlistID})}" class="btn btn-success btn-sm" role="button">Update</a>
+                <a th:href="@{/wishlist/{id}/wishlistitems(id=${wishlist.wishlistID})}" class="btn btn-success btn-sm" role="button">View</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <a th:href="@{/wishlist/add}" class="btn btn-success" role="button">+ Add WishList</a>  <!-- find a way to limit this button to 3 clicks (3 wishlist) -->
+    </div>
+</div>
+</body>
+</html>

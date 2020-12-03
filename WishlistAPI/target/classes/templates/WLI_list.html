@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List of WishLists Items</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}">
+    <style>
+    thead{
+    	color: red;
+    	font-size: 50px;
+    }
+    </style>
+</head>
+<body>
+<div class="alert alert-success">
+    <strong>WishListsItems</strong>
+</div>
+<div class="container">
+    <div style="text-align: right; margin-bottom: 5px;">
+        <a th:href="@{/wishlistitems/add}" class="btn btn-success" role="button">+ Add WishListItem</a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>WishListItemID</th>
+            <th>WishListID</th>
+            <th>BookID</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody> <!-- find way to no longer create items but get them from books -->
+        <tr th:each="wishlistitems : ${wishlistitems}">
+        	<td th:text="${wishlistitems.wishlistitemID}"></td>
+        	<td th:text="${wishlistitems.wishlist.wishlistID}"></td>
+            <td th:text="${wishlistitems.Book.book_id}"></td>
+            <td>
+                <a th:href="@{/wishlistitems/edit/{id}(id=${wishlistitems.wishlistitemID})}" class="btn btn-success btn-sm" role="button">Update</a>
+                <a th:href="@{/wishlistitems/delete/{id}(id=${wishlistitems.wishlistitemID})}" class="btn btn-danger btn-sm" role="button">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

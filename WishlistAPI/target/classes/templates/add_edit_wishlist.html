@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add/Update New Wishlist</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}">
+   <style type="text/css">
+    body{
+    background-color:lightgrey;
+    }
+    </style>  
+</head>
+<body>
+<div class="alert alert-success">
+    <strong>ADD/UPDATE WISHLIST</strong>
+</div>
+<div class="container">
+    <h5>Add~Edit</h5>
+    <form action="#" th:action="@{/wishlist/addEdit}" method="post" th:object="${wishlist}">
+        WishListID:<br/>
+        <input type="text" class="form-control" id="wishlistID" th:field="*{wishlistID}" placeholder="WishListID"/>
+        <br/>
+        UserID:<br/>
+        <input type="text" class="form-control" id="userID" th:field="*{userID}" placeholder="UserID"/>
+        <br/>
+        WishListIndex:<br/>
+        <input type="text" class="form-control" id="wishlistindex" th:field="*{wishlistindex}" placeholder="WishList Index"/>
+        <br/>
+        WishListName:<br/>
+        <input type="text" class="form-control" id="wishlistname" th:field="*{wishlistname}"  placeholder="WishList Name"/>
+        <input type="hidden" id="wishlistID" th:field="*{wishlistID}">
+        <br/>
+        <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+</div>
+</body>
+</html>

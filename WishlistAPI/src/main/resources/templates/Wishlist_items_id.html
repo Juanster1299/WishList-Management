@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List WishList</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="alert alert-success">
+  <h1>
+  WISHLIST: 
+  </h1>
+  
+</div> 
+<div class="container">
+ <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>WishListItemID</th>
+            <th>WishListID</th>
+            <th>BookID</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="wishlist : ${wishlist}">
+        	<td th:text="${wishlist.wishlistitemID}"></td>
+        	<td th:text="${wishlist.Wishlist.wishlistID}"></td>
+            <td th:text="${wishlist.Book.book_id}"></td>
+            <td>
+                <a th:href="@{/wishlistitems/delete/{id}(id=${wishlist.wishlistitemID})}" class="btn btn-danger btn-sm" role="button">Delete</a>  <!-- deletes item that i want but returns empty item list instead of original item list-->
+                <button class="btn btn-warning btn-sm" role="button">Send To...</button> <!-- this buttons should give me more options to send it either to the cart or any of the other two wishlist -->
+        </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    <div style="text-align: center; margin-bottom: 20px;">
+ <a th:href="@{/wishlist/list}" class="btn btn-success" role="button">Go Back</a>  <!-- fix back button to go back to wishlist list (COMPLETE) --> 
+</div>
+</body>
+</html>

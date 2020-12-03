@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add New Wishlist Item</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="alert alert-success">
+    <strong>NEW WISHLIST ITEM</strong>
+</div>
+<div class="container">
+    <h5>Add~Edit</h5> <!-- find ways to make the book(product) into the items(wishlistitems) -->
+    <form action="#" th:action="@{/wishlistitems/addEdit}" method="post" th:object="${wishlistitems}">
+    	WishListItemID:<br/>
+        <input type="text" class="form-control" id="wishlistitemID" th:field="*{wishlistitemID}" placeholder="WishListItemID"/>
+        <br/>
+        WishListID:<br/>
+        <input type="text" class="form-control" id="wishlistID" th:field="*{wishlist}" placeholder="WishlistID"/>
+        <br/>
+        BookID:<br/>
+        <input type="text" class="form-control" id="book_id" th:field="*{book}"  placeholder="BookID"/>
+        <input type="hidden" id="wishlistitemID" th:field="*{wishlistitemID}">
+        <br/>
+        <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+</div>
+</body>
+</html>
