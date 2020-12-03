@@ -1,0 +1,27 @@
+SQL CODE TO CREATE WISHLIST AND WISHLISTITEMS TABLES WIHT COLUMNS 
+
+Drop database if exists geektextdb;
+
+CREATE DATABASE GeekTextDB;
+USE GeekTextDB;
+
+
+/** WishList - Holds up to 3 Wishlists per user**/
+CREATE TABLE `WishList` (
+  `wishListID` int not null auto_increment,
+  `UserID` int not null,
+  `WishListIndex` int not null,
+  `WishListName` varchar(25) not null,
+  PRIMARY KEY (`WishListID`)
+);
+
+/** WishListItems - Holds which items and the quantity 
+added to the user Wishlist **/
+CREATE TABLE `WishListItems` (
+  `WishListItemID` int not null auto_increment,
+  `WishListID` int not null,
+  `BookID` int not null,
+  PRIMARY KEY (`WishListItemID`),
+  FOREIGN KEY (`WishListID`) REFERENCES GeekTextDB.WishList(`WishListID`),
+  FOREIGN KEY (`BookID`) REFERENCES GeekTextDB.Books(`book_id`)
+  );
