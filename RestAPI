@@ -1,0 +1,57 @@
+// Get all WishList
+@GetMapping
+public List<WishList> getAllWishList(){
+	return this.wishListRepository.findAll();
+}
+
+// Get a Single WishList by ID
+@GetMapping("/{id}")
+public WishList getWishListById(@PathVariable(value = "id")Integer wishlistID) throws WishListNotFoundException{
+	return this.wishListRepository.findById(wishlistID)
+			.orElseThrow(()-> new WishListNotFoundException(wishlistID));
+}
+
+
+// Create WishList 
+@PostMapping
+public WishList createWishList(@RequestBody WishList wishlist) {
+	return this.wishListRepository.save(wishlist);
+}
+ 
+// Update WishList
+@PutMapping("/{id}")
+public WishList updateWishList(@PathVariable(value = "id") Integer wishlistID, 
+	@RequestBody WishList wishlistDetails) throws WishListNotFoundException{
+	
+WishList wishlist = this.wishListRepository.findById(wishlistID)
+		.orElseThrow(()-> new WishListNotFoundException(wishlistID));
+	
+wishlist.setUserID(wishlistDetails.getUserID());
+wishlist.setWishlistindex(wishlistDetails.getWishlistindex());
+wishlist.setWishlistname(wishlistDetails.getWishlistname());
+	
+	WishList updatedWishList = wishListRepository.save(wishlist);
+	
+	return updatedWishList;
+	
+}
+
+ //Delete WishList by ID
+
+@DeleteMapping("/{id}")
+public ResponseEntity<?> deleteWishList(@PathVariable(value = "id") Integer wishlistID) throws WishListNotFoundException{
+WishList wishlist = wishListRepository.findById(wishlistID)
+		.orElseThrow(()-> new WishListNotFoundException(wishlistID));
+	
+wishListRepository.delete(wishlist);
+	
+return ResponseEntity.ok().build();
+
+}
+
+//Get list of items from a WishList
+@GetMapping("/{id}/wishlistitems")
+public List<WishListItems> getItemsByWishList(@PathVariable( value ="id") Integer wishlistID) throws WishListNotFoundException{
+return this.wishListRepository.getItemsByWishList(wishlistID);
+}	
+}
